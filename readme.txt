@@ -4,7 +4,7 @@ Donate link: http://fukata.org/
 Tags: image,exif
 Requires at least: 2.9.2
 Tested up to: 2.9.2
-Stable tag: version-1.0.0
+Stable tag: 1.0.0
 
 画像のEXIF情報を記事本文内に埋め込む。
 
