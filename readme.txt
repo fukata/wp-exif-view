@@ -1,7 +1,7 @@
 === WPExifView ===
 Contributors: tatsuya
 Donate link: http://fukata.org/
-Tags: image,exif
+Tags: images,exif
 Requires at least: 2.9.2
 Tested up to: 2.9.2
 Stable tag: 1.1.0
