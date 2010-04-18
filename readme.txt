@@ -37,7 +37,7 @@ Stable tag: 1.1.0
 
 == Screenshots ==
 
-1.This is first screenshot
+1. Setting template
 
 == Changelog ==
 = 1.1.0 =
