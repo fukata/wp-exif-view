@@ -3,7 +3,7 @@
 Plugin Name: WPExifView
 Plugin URI: 
 Description: 記事本文にEXIF情報を埋め込みます。
-Version: 1.0.0
+Version: 1.1.0
 Author: Tatsuya Fukata
 Author URI: http://fukata.org
 */
