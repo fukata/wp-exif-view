@@ -2,7 +2,24 @@
 require_once dirname(__FILE__).'/WPEVConverter.php';
 
 class WPExifView {
+	/**
+	 * プラグイン名
+	 * @var string
+	 */
 	const PLUGIN_NAME = "WPExifView";
+	
+	/**
+	 * テキストドメイン
+	 * @var string
+	 */
+	const TEXT_DOMAIN = "wpexifview";
+	
+	/**
+	 * 言語ファイル格納ディレクトリ
+	 * @var string
+	 */
+	private $languageDir;
+	
 	// デフォルト値
 	/**
 	 * タグの始端文字列
@@ -20,29 +37,23 @@ class WPExifView {
 	 * テンプレート文字列
 	 * @var string
 	 */
-	const DEFAULT_TEMPLATE ="<blockquote>
-撮影日時：[#datetime]<br/>
-カメラモデル：[#camera]<br/>
-ISO値：[#iso]<br/>
-露出値：[#exposure_time]<br/>
-F値：[#exposure_time]<br/>
-</blockquote>";
-	
+	private $defaultTemplate;
+
 	/**
 	 * 利用可能なタグ一覧
 	 * @var array
 	 */
 	public static $AVAILABLE_TAGS = array(
-		array("label"=>"ファイル名", "tag"=>"filename", "convert_method"=>"conv_filename"),
-		array("label"=>"ファイルサイズ", "tag"=>"filesize", "convert_method"=>"conv_filesize"),
-		array("label"=>"画像サイズ（縦）", "tag"=>"height", "convert_method"=>"conv_height"),
-		array("label"=>"画像サイズ（横）", "tag"=>"width", "convert_method"=>"conv_width"),
+		array("label"=>"FileName", "tag"=>"filename", "convert_method"=>"conv_filename"),
+		array("label"=>"FileSize", "tag"=>"filesize", "convert_method"=>"conv_filesize"),
+		array("label"=>"ImageHeight", "tag"=>"height", "convert_method"=>"conv_height"),
+		array("label"=>"ImageWidth", "tag"=>"width", "convert_method"=>"conv_width"),
 		array("label"=>"MimeType", "tag"=>"mimetype", "convert_method"=>"conv_mimetype"),
-		array("label"=>"撮影日時", "tag"=>"datetime", "convert_method"=>"conv_datetime"),
-		array("label"=>"カメラモデル", "tag"=>"camera", "convert_method"=>"conv_camera"),
-		array("label"=>"ISO値", "tag"=>"iso", "convert_method"=>"conv_iso"),
-		array("label"=>"露出値", "tag"=>"exposure_time", "convert_method"=>"conv_exposure_time"),
-		array("label"=>"F値", "tag"=>"fnumber", "convert_method"=>"conv_fnumber"),
+		array("label"=>"DateTime", "tag"=>"datetime", "convert_method"=>"conv_datetime"),
+		array("label"=>"Model", "tag"=>"camera", "convert_method"=>"conv_camera"),
+		array("label"=>"ISO", "tag"=>"iso", "convert_method"=>"conv_iso"),
+		array("label"=>"ExposureTime", "tag"=>"exposure_time", "convert_method"=>"conv_exposure_time"),
+		array("label"=>"FNumber", "tag"=>"fnumber", "convert_method"=>"conv_fnumber"),
 	);
 	
 	// オプション項目
@@ -53,6 +64,25 @@ F値：[#exposure_time]<br/>
 	const OPT_TEMPLATE = "wpev_template";
 	
 	/**
+	 * コンストラクタ
+	 * @return unknown_type
+	 */
+	public function __construct() {
+		$this->languageDir = dirname(__FILE__) . "/language/";
+		$this->load_plugin_textdomain();
+		
+		// デフォルトテンプレートの整形
+		$this->defaultTemplate = "";
+		$this->defaultTemplate .= "<blockquote>";
+		$this->defaultTemplate .= __("DateTime", self::TEXT_DOMAIN)."：[#datetime]<br/>";
+		$this->defaultTemplate .= __("Model", self::TEXT_DOMAIN)."：[#camera]<br/>";
+		$this->defaultTemplate .= __("ISO", self::TEXT_DOMAIN)."：[#iso]<br/>";
+		$this->defaultTemplate .= __("ExposureTime", self::TEXT_DOMAIN)."：[#exposure_time]<br/>";
+		$this->defaultTemplate .= __("FNumber", self::TEXT_DOMAIN)."：[#fnumber]";
+		$this->defaultTemplate .= "</blockquote>";
+	}
+	
+	/**
 	 * EXIF情報を返す。
 	 * 
 	 * @param unknown_type $atts
@@ -60,6 +90,8 @@ F値：[#exposure_time]<br/>
 	 * @return string
 	 */
 	public function doInsertExifData($atts, $content=null) {
+		$this->load_plugin_textdomain();
+		
 		// オプションの設定
 		$atts = shortcode_atts(array(
 			'img'=>null,
@@ -76,7 +108,7 @@ F値：[#exposure_time]<br/>
 		// exifデータの取得
 		$exif = exif_read_data($img_path, 0, true);
 		if (!$exif) {
-			return "not have exif data.";
+			return __("Not have exif data", self::TEXT_DOMAIN);
 		}
 		
 		$html = get_option('wpev_template');
@@ -145,9 +177,10 @@ F値：[#exposure_time]<br/>
 	 * @return unknown_type
 	 */
 	public function pluginOptions() {
+		$this->load_plugin_textdomain();
 ?>
 <div class="wrap">
-	<h2>ExifView</h2>
+	<h2><?php echo self::PLUGIN_NAME ?></h2>
 	<form method="post" action="options.php">
 		<?php wp_nonce_field('update-options'); ?>
 		<input type="hidden" name="action" value="update" />
@@ -155,15 +188,15 @@ F値：[#exposure_time]<br/>
 		<table class="form-table">
 			<tr valign="top">
 				<th scope="row">
-					<p>テンプレート</p>
-					<div>■利用可能な項目<br/>
+					<p><?php echo _e('Template') ?></p>
+					<div><?php echo _e('Available Items') ?><br/>
 					<ul>
 						<?php foreach(self::$AVAILABLE_TAGS as $tag) { ?>
-							<li><?php echo $tag["label"] ?>：<?php echo $this->getTag($tag["tag"]) ?></li>
+							<li><?php echo _e($tag["label"], self::TEXT_DOMAIN) ?>：<?php echo $this->getTag($tag["tag"]) ?></li>
 						<?php } ?>
 					</ul>
 				</th>
-				<td><textarea name="wpev_template" rows="15" cols="70"><?php echo self::getTemplate(); ?></textarea></td>
+				<td><textarea name="wpev_template" rows="15" cols="70"><?php echo $this->getTemplate(); ?></textarea></td>
 			</tr>
 		</table>
 		<p class="submit">
@@ -177,21 +210,26 @@ F値：[#exposure_time]<br/>
 	/**
 	 * オプション設定画面での更新対象の項目を返す。
 	 * 
-	 * @return unknown_type
+	 * @return string
 	 */
 	private static function getPageOptions() {
 		return self::OPT_TEMPLATE;
 	}
 	
-	public static function getTemplate() {
-		return get_option(self::OPT_TEMPLATE, self::DEFAULT_TEMPLATE);
+	/**
+	 * テンプレートの値を返す。
+	 * 
+	 * @return string
+	 */
+	public function getTemplate() {
+		return get_option(self::OPT_TEMPLATE, $this->defaultTemplate);
 	}
 	
 	/**
 	 * タグを整形して返す。
 	 * 
-	 * @param unknown_type $tag
-	 * @return unknown_type
+	 * @param string $tag
+	 * @return string
 	 */
 	public function getTag($tag) {
 		return $this->getTagStart() . trim($tag) . $this->getTagEnd();
@@ -200,7 +238,7 @@ F値：[#exposure_time]<br/>
 	/**
 	 * タグの始端文字列を返す。
 	 * 
-	 * @return unknown_type
+	 * @return string
 	 */
 	private function getTagStart(){
 		return self::DEFAULT_TAG_START;
@@ -208,10 +246,18 @@ F値：[#exposure_time]<br/>
 	
 	/**
 	 * タグの終端文字列を返す。
-	 * @return unknown_type
+	 * @return string
 	 */
 	private function getTagEnd(){
 		return self::DEFAULT_TAG_END;
+	}
+	
+	/**
+	 * テキストドメインのロード
+	 * @return void
+	 */
+	private function load_plugin_textdomain() {
+		load_plugin_textdomain(self::TEXT_DOMAIN, $this->languageDir);
 	}
 }
 ?>

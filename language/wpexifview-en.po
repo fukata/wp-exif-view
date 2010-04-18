@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPExifView\n"
+"Report-Msgid-Bugs-To: tatsuya@fukata.org\n"
+"Language-Team: tatsuya@fukata.org\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Last-Translator: tatsuya@fukata.org\n"
+
+msgid "Not have exif data"
+msgstr "Not have exif data"
+
+msgid "Template"
+msgstr "Template"
+
+msgid "Available Items"
+msgstr "Available Items"
+
+msgid "FileName"
+msgstr "FileName"
+
+msgid "FileSize"
+msgstr "FileSize"
+
+msgid "ImageHeight"
+msgstr "ImageHeight"
+
+msgid "ImageWidth"
+msgstr "ImageWidth"
+
+msgid "MimeType"
+msgstr "MimeType"
+
+msgid "DateTime"
+msgstr "DateTime"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "ExposureTime"
+msgstr "ExposureTime"
+
+msgid "FNumber"
+msgstr "FNumber"

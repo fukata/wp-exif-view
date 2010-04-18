@@ -4,7 +4,7 @@ Donate link: http://fukata.org/
 Tags: image,exif
 Requires at least: 2.9.2
 Tested up to: 2.9.2
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 画像のEXIF情報を記事本文内に埋め込む。
 
@@ -37,9 +37,11 @@ Stable tag: 1.0.0
 
 == Screenshots ==
 
-1. Setting template
+1.This is first screenshot
 
 == Changelog ==
+= 1.1.0 =
+* 管理画面の国際化
 
 = 1.0.0 =
 * テンプレートを登録できるように変更
