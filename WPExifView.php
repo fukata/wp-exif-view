@@ -111,7 +111,7 @@ class WPExifView {
 			return __("Not have exif data", self::TEXT_DOMAIN);
 		}
 		
-		$html = get_option('wpev_template');
+		$html = ($content!=null) ? $content : $this->getTemplate('wpev_template');
 		foreach (self::$AVAILABLE_TAGS as $tag) {
 			$html = str_replace($this->getTag($tag["tag"]), WPEVConverter::$tag["convert_method"]($exif), $html);
 		}
