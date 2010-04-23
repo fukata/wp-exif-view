@@ -47,3 +47,21 @@ msgstr "露出値"
 
 msgid "FNumber"
 msgstr "F値"
+
+msgid "CCDWidth"
+msgstr "CCDWidth"
+
+msgid "UserComment"
+msgstr "ユーザコメント"
+
+msgid "Software"
+msgstr "ソフトウェア"
+
+msgid "Artist"
+msgstr "アーティスト"
+
+msgid "Copyright"
+msgstr "Copyright"
+
+msgid "FirmwareVersion"
+msgstr "ファームウェアバージョン"

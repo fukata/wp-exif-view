@@ -47,3 +47,21 @@ msgstr "ExposureTime"
 
 msgid "FNumber"
 msgstr "FNumber"
+
+msgid "CCDWidth"
+msgstr "CCDWidth"
+
+msgid "UserComment"
+msgstr "UserComment"
+
+msgid "Software"
+msgstr "Software"
+
+msgid "Artist"
+msgstr "Artist"
+
+msgid "Copyright"
+msgstr "Copyright"
+
+msgid "FirmwareVersion"
+msgstr "FirmwareVersion"

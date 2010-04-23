@@ -44,16 +44,22 @@ class WPExifView {
 	 * @var array
 	 */
 	public static $AVAILABLE_TAGS = array(
-		array("label"=>"FileName", "tag"=>"filename", "convert_method"=>"conv_filename"),
-		array("label"=>"FileSize", "tag"=>"filesize", "convert_method"=>"conv_filesize"),
-		array("label"=>"ImageHeight", "tag"=>"height", "convert_method"=>"conv_height"),
-		array("label"=>"ImageWidth", "tag"=>"width", "convert_method"=>"conv_width"),
-		array("label"=>"MimeType", "tag"=>"mimetype", "convert_method"=>"conv_mimetype"),
-		array("label"=>"DateTime", "tag"=>"datetime", "convert_method"=>"conv_datetime"),
-		array("label"=>"Model", "tag"=>"camera", "convert_method"=>"conv_camera"),
-		array("label"=>"ISO", "tag"=>"iso", "convert_method"=>"conv_iso"),
-		array("label"=>"ExposureTime", "tag"=>"exposure_time", "convert_method"=>"conv_exposure_time"),
+		array("label"=>"FileName", "tag"=>"filename", "convert_method"=>"conv_filename", "note"=>""),
+		array("label"=>"FileSize", "tag"=>"filesize", "convert_method"=>"conv_filesize", "note"=>""),
+		array("label"=>"ImageHeight", "tag"=>"height", "convert_method"=>"conv_height", "note"=>""),
+		array("label"=>"ImageWidth", "tag"=>"width", "convert_method"=>"conv_width", "note"=>""),
+		array("label"=>"MimeType", "tag"=>"mimetype", "convert_method"=>"conv_mimetype", "note"=>""),
+		array("label"=>"DateTime", "tag"=>"datetime", "convert_method"=>"conv_datetime", "note"=>""),
+		array("label"=>"Model", "tag"=>"camera", "convert_method"=>"conv_camera", "note"=>""),
+		array("label"=>"ISO", "tag"=>"iso", "convert_method"=>"conv_iso", "note"=>""),
+		array("label"=>"ExposureTime", "tag"=>"exposure_time", "convert_method"=>"conv_exposure_time", "note"=>""),
 		array("label"=>"FNumber", "tag"=>"fnumber", "convert_method"=>"conv_fnumber"),
+		array("label"=>"CCDWidth", "tag"=>"ccdwidth", "convert_method"=>"conv_ccd_width"),
+		array("label"=>"UserComment", "tag"=>"usercomment", "convert_method"=>"conv_user_comment", "note"=>""),
+		array("label"=>"Software", "tag"=>"software", "convert_method"=>"conv_software", "note"=>""),
+		array("label"=>"Artist", "tag"=>"artist", "convert_method"=>"conv_artist", "note"=>""),
+		array("label"=>"Copyright", "tag"=>"copyright", "convert_method"=>"conv_copyright", "note"=>""),
+		array("label"=>"FirmwareVersion", "tag"=>"firmware_version", "convert_method"=>"conv_firmware_version", "note"=>""),
 	);
 	
 	// オプション項目
