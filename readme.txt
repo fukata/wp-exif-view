@@ -47,6 +47,10 @@ Stable tag: 1.2.0
 2. Setting template for post
 
 == Changelog ==
+= 1.2.0 =
+* 利用可能項目の追加
+* 記事毎にテンプレートを設定できるように変更
+
 = 1.1.0 =
 * 管理画面の国際化
 
