@@ -70,6 +70,15 @@ class WPEVConverter {
 	}
 
 	/**
+	 * return converted MAKERNOTE.UndefinedTag:0x0095 value
+	 * @param array $exif
+	 * @param array $options
+	 */
+	public static function conv_lens($exif, $options=array()){
+		return self::isEmptyMakerNoteSection($exif) ? self::EMPTY_VALUE : $exif['MAKERNOTE']['UndefinedTag:0x0095'];
+	}
+
+	/**
 	 * return converted EXIF.ISOSpeedRatings value
 	 * @param array $exif
 	 * @param array $options

@@ -36,8 +36,11 @@ msgstr "MimeType"
 msgid "DateTime"
 msgstr "撮影日時"
 
-msgid "Model"
-msgstr "カメラ"
+msgid "CameraModel"
+msgstr "カメラモデル"
+
+msgid "Lens"
+msgstr "レンズ"
 
 msgid "ISO"
 msgstr "ISO値"
