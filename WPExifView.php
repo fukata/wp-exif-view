@@ -50,6 +50,7 @@ class WPExifView {
 		array("label"=>"ImageWidth", "tag"=>"width", "convert_method"=>"conv_width", "note"=>""),
 		array("label"=>"MimeType", "tag"=>"mimetype", "convert_method"=>"conv_mimetype", "note"=>""),
 		array("label"=>"DateTime", "tag"=>"datetime", "convert_method"=>"conv_datetime", "note"=>""),
+		array("label"=>"Maker", "tag"=>"maker", "convert_method"=>"conv_maker", "note"=>""),
 		array("label"=>"CameraModel", "tag"=>"camera", "convert_method"=>"conv_camera", "note"=>""),
 		array("label"=>"Lens", "tag"=>"lens", "convert_method"=>"conv_lens", "note"=>""),
 		array("label"=>"ISO", "tag"=>"iso", "convert_method"=>"conv_iso", "note"=>""),

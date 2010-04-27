@@ -4,7 +4,7 @@ Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
 Tested up to: 2.9.2
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 画像のEXIF情報を記事本文内に埋め込む。
 
@@ -20,6 +20,7 @@ Stable tag: 1.2.1
 * 画像サイズ（横）
 * MimeType
 * 撮影日時
+* カメラメーカー
 * カメラモデル
 * レンズ名
 * ISO値
@@ -48,6 +49,9 @@ Stable tag: 1.2.1
 2. Setting template for post
 
 == Changelog ==
+= 1.2.2 =
+* 利用可能項目に「Maker」を追加
+
 = 1.2.1 =
 * 利用可能項目に「Lens」を追加
 

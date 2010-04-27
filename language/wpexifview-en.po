@@ -36,6 +36,9 @@ msgstr "MimeType"
 msgid "DateTime"
 msgstr "DateTime"
 
+msgid "Maker"
+msgstr "CameraMaker"
+
 msgid "CameraModel"
 msgstr "CameraModel"
 

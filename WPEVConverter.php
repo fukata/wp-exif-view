@@ -61,6 +61,15 @@ class WPEVConverter {
 	}
 
 	/**
+	 * return converted IFD0.Make value
+	 * @param array $exif
+	 * @param array $options
+	 */
+	public static function conv_maker($exif, $options=array()){
+		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Make'];
+	}
+
+	/**
 	 * return converted IFD0.Model value
 	 * @param array $exif
 	 * @param array $options
