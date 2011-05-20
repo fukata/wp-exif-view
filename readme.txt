@@ -19,7 +19,8 @@ Available tags
 * Image Height
 * Image Width
 * MimeType
-* Date Taken
+* Date Time
+* Taken Date
 * Camera Maker
 * Camera Model
 * Lens Name
