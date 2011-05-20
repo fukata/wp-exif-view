@@ -51,6 +51,7 @@ None
 == Changelog ==
 = 1.3.0 =
 * Documents Japanese to English
+* Support multisite
 * Add TakenDate
 * fixed FNumber and EsposureTime
 
