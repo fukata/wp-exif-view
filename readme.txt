@@ -49,6 +49,11 @@ None
 2. Setting template for post
 
 == Changelog ==
+= 1.3.0 =
+* Documents Japanese to English
+* Add TakenDate
+* fixed FNumber and EsposureTime
+
 = 1.2.2 =
 * Add available tag to "Maker"
 
