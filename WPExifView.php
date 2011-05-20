@@ -3,44 +3,44 @@ require_once dirname(__FILE__).'/WPEVConverter.php';
 
 class WPExifView {
 	/**
-	 * プラグイン名
+	 * Plugin name
 	 * @var string
 	 */
 	const PLUGIN_NAME = "WPExifView";
 	
 	/**
-	 * テキストドメイン
+	 * Text domain
 	 * @var string
 	 */
 	const TEXT_DOMAIN = "wpexifview";
 	
 	/**
-	 * 言語ファイル格納ディレクトリ
+	 * Language file dir path
 	 * @var string
 	 */
 	private $languageDir;
 	
-	// デフォルト値
+	// Default values
 	/**
-	 * タグの始端文字列
+	 * Default short tag prefix
 	 * @var string
 	 */
 	const DEFAULT_TAG_START = "[#";
 	
 	/**
-	 * タグの終端文字列
+	 * Default short tag suffix
 	 * @var string
 	 */
 	const DEFAULT_TAG_END = "]";
 	
 	/**
-	 * テンプレート文字列
+	 * Default template
 	 * @var string
 	 */
 	private $defaultTemplate;
 
 	/**
-	 * 利用可能なタグ一覧
+	 * Available tags
 	 * @var array
 	 */
 	public static $AVAILABLE_TAGS = array(
@@ -64,16 +64,15 @@ class WPExifView {
 		array("label"=>"FirmwareVersion", "tag"=>"firmware_version", "convert_method"=>"conv_firmware_version", "note"=>""),
 	);
 	
-	// オプション項目
+	// Option items
 	/**
-	 * テンプレート
+	 * Template
 	 * @var string
 	 */
 	const OPT_TEMPLATE = "wpev_template";
 	
 	/**
-	 * コンストラクタ
-	 * @return unknown_type
+	 * Construct
 	 */
 	public function __construct() {
 		$this->languageDir = dirname(__FILE__) . "/language/";
@@ -91,34 +90,35 @@ class WPExifView {
 	}
 	
 	/**
-	 * EXIF情報を返す。
+	 * Insert EXIF information in post
 	 * 
-	 * @param unknown_type $atts
-	 * @param unknown_type $content
+	 * @param assoc $atts short tag options
+	 * @param string $content post content
 	 * @return string
 	 */
 	public function doInsertExifData($atts, $content=null) {
 		$this->load_plugin_textdomain();
 		
-		// オプションの設定
+		// Setting options
 		$atts = shortcode_atts(array(
 			'img'=>null,
 		), $atts);
 	
-		// アップロードディレクトリ
+		// Upload dir path
 		$upload_path = $this->getUploadDir();
 	
-		$img_path = $upload_path . "/" . $this->removeHeadSlash($atts['img']);
+		$img_path = $upload_path . "/" . ltrim($atts['img'], '/');
 		if (!is_file($img_path)) {
 			return $img_path . " is not exists.";
 		}
 		
-		// exifデータの取得
+		// Exif information
 		$exif = exif_read_data($img_path, 0, true);
 		if (!$exif) {
 			return __("Not have exif data", self::TEXT_DOMAIN);
 		}
 		
+		// Convert template
 		$html = ($content!=null) ? $content : $this->getTemplate('wpev_template');
 		foreach (self::$AVAILABLE_TAGS as $tag) {
 			$html = str_replace($this->getTag($tag["tag"]), WPEVConverter::$tag["convert_method"]($exif), $html);
@@ -128,29 +128,9 @@ class WPExifView {
 	}
 	
 	/**
-	 * 先頭のスラッシュ「/」を除去する。
+	 * Return upload dir path
 	 * 
-	 * @param unknown_type $value
-	 * @return unknown_type
-	 */
-	private function removeHeadSlash($value) {
-		$len = strlen($value);
-		if ($len<=0) {
-			return $value;
-		}
-		
-		$sub = substr($value, 0, 1);
-		if ($sub=='/') {
-			return substr($value, 1, $len-1);
-		} else {
-			return $value;
-		}
-	}
-	
-	/**
-	 * 画像アップロードディレクトリを返す。
-	 * 
-	 * @return unknown_type
+	 * @return string upload dir path
 	 */
 	private function getUploadDir() {
 		$upload_path = get_option( 'upload_path' );
@@ -171,18 +151,14 @@ class WPExifView {
 	}
 	
 	/**
-	 * オプションメニューを追加する。
-	 * 
-	 * @return unknown_type
+	 * Add plugin option menu
 	 */
 	public function pluginMenu() {
 		add_options_page(self::PLUGIN_NAME.' Option', self::PLUGIN_NAME, 8, __FILE__, array($this,"pluginOptions"));
 	}
 	
 	/**
-	 * オプション設定画面のHTMLを生成する。
-	 * 
-	 * @return unknown_type
+	 * Draw option setting page html
 	 */
 	public function pluginOptions() {
 		$this->load_plugin_textdomain();
@@ -216,7 +192,7 @@ class WPExifView {
 	}
 	
 	/**
-	 * オプション設定画面での更新対象の項目を返す。
+	 * Return update option item list
 	 * 
 	 * @return string
 	 */
@@ -225,7 +201,7 @@ class WPExifView {
 	}
 	
 	/**
-	 * テンプレートの値を返す。
+	 * Return option template value
 	 * 
 	 * @return string
 	 */
@@ -234,7 +210,7 @@ class WPExifView {
 	}
 	
 	/**
-	 * タグを整形して返す。
+	 * Return format tag
 	 * 
 	 * @param string $tag
 	 * @return string
@@ -244,7 +220,7 @@ class WPExifView {
 	}
 	
 	/**
-	 * タグの始端文字列を返す。
+	 * Return tag prefix
 	 * 
 	 * @return string
 	 */
@@ -253,7 +229,8 @@ class WPExifView {
 	}
 	
 	/**
-	 * タグの終端文字列を返す。
+	 * Return tag suffix
+	 * 
 	 * @return string
 	 */
 	private function getTagEnd(){
@@ -261,7 +238,7 @@ class WPExifView {
 	}
 	
 	/**
-	 * テキストドメインのロード
+	 * load text domain
 	 * @return void
 	 */
 	private function load_plugin_textdomain() {

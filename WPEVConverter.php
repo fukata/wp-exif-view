@@ -1,7 +1,7 @@
 <?php
 class WPEVConverter {
 	/**
-	 * 対象のセクションが存在しなかった場合に返す値
+	 * Default value when target exif section does not exists.
 	 * @var string
 	 */
 	const EMPTY_VALUE = '';
