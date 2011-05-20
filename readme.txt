@@ -25,7 +25,7 @@ Available tags
 * Lens Name
 * ISO
 * Exposure
-* F
+* FNumber
 * CCDWidth
 * User Comment
 * Software
