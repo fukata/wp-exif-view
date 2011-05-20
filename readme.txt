@@ -3,8 +3,8 @@ Contributors: tatsuya
 Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
-Tested up to: 3.1.2
-Stable tag: 1.3.0
+Tested up to: 3.1.0
+Stable tag: 1.3.1
 
 Image EXIF information embedded within the body of the post.
 
@@ -50,6 +50,9 @@ None
 2. Setting template for post
 
 == Changelog ==
+= 1.3.1 =
+* As the latest version v1.3.0, but it had not been reflected in changes only version
+
 = 1.3.0 =
 * Documents Japanese to English
 * Support multisite
@@ -70,9 +73,6 @@ None
 * Internationalization Admin
 
 = 1.0.0 =
-* Modified to allow for templates
+* This version is first release.
 
 == Upgrade Notice ==
-
-= 1.0.0 =
-This version is first release.
