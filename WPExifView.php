@@ -50,6 +50,7 @@ class WPExifView {
 	array("label"=>"ImageWidth", "tag"=>"width", "convert_method"=>"conv_width", "note"=>""),
 	array("label"=>"MimeType", "tag"=>"mimetype", "convert_method"=>"conv_mimetype", "note"=>""),
 	array("label"=>"DateTime", "tag"=>"datetime", "convert_method"=>"conv_datetime", "note"=>""),
+	array("label"=>"TakenDate", "tag"=>"taken_date", "convert_method"=>"conv_taken_date", "note"=>""),
 	array("label"=>"Maker", "tag"=>"maker", "convert_method"=>"conv_maker", "note"=>""),
 	array("label"=>"CameraModel", "tag"=>"camera", "convert_method"=>"conv_camera", "note"=>""),
 	array("label"=>"Lens", "tag"=>"lens", "convert_method"=>"conv_lens", "note"=>""),
@@ -81,7 +82,7 @@ class WPExifView {
 		// デフォルトテンプレートの整形
 		$this->defaultTemplate = "";
 		$this->defaultTemplate .= "<blockquote>";
-		$this->defaultTemplate .= __("DateTime", self::TEXT_DOMAIN)."：[#datetime]<br/>";
+		$this->defaultTemplate .= __("TakenDate", self::TEXT_DOMAIN)."：[#taken_date]<br/>";
 		$this->defaultTemplate .= __("Model", self::TEXT_DOMAIN)."：[#camera]<br/>";
 		$this->defaultTemplate .= __("ISO", self::TEXT_DOMAIN)."：[#iso]<br/>";
 		$this->defaultTemplate .= __("ExposureTime", self::TEXT_DOMAIN)."：[#exposure_time]<br/>";

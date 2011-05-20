@@ -5,7 +5,7 @@ class WPEVConverter {
 	 * @var string
 	 */
 	const EMPTY_VALUE = '';
-	
+
 	/**
 	 * return converted FILE.FileName value
 	 * @param array $exif
@@ -61,6 +61,15 @@ class WPEVConverter {
 	}
 
 	/**
+	 * return converted EXIF.DateTimeOriginal value
+	 * @param array $exif
+	 * @param array $options
+	 */
+	public static function conv_taken_date($exif, $options=array()){
+		return self::isEmptyExifSection($exif) ? self::EMPTY_VALUE : $exif['EXIF']['DateTimeOriginal'];
+	}
+
+	/**
 	 * return converted IFD0.Make value
 	 * @param array $exif
 	 * @param array $options
@@ -102,16 +111,38 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_exposure_time($exif, $options=array()){
-		return self::isEmptyExifSection($exif) ? self::EMPTY_VALUE : $exif['EXIF']['ExposureTime'];
+		if (! self::isEmptyExifSection($exif)) {
+			$splitedExposure = explode('/', $exif['EXIF']['ExposureTime']);
+			if ($splitedExposure[0] == 1) {
+				$exposure = $exif['EXIF']['ExposureTime'];
+			} else if (is_numeric($splitedExposure[0]) && is_numeric($splitedExposure[1])) {
+				$_exposure = $splitedExposure[1] / $splitedExposure[0];
+				// ShutterSpeed over 1 seconds
+				if ($_exposure < 1) {
+					$_e = $splitedExposure[0] / $splitedExposure[1];
+					$exposure = $_e . '/1';
+				} else {
+					$exposure = '1/' . $_exposure;
+				}
+			}
+		} else {
+			$exposure = self::EMPTY_VALUE;
+		}
+		return $exposure;
 	}
 
 	/**
-	 * return converted EXIF.FNumber value
+	 * return converted COMPUTED.ApertureFNumber value
 	 * @param array $exif
 	 * @param array $options
 	 */
 	public static function conv_fnumber($exif, $options=array()){
-		return self::isEmptyExifSection($exif) ? self::EMPTY_VALUE : $exif['EXIF']['FNumber'];
+		if (self::isEmptyComputedSeciton($exif)) {
+			return self::EMPTY_VALUE;
+		} else {
+			$splitedFNumber = explode('/', $exif['COMPUTED']['ApertureFNumber']);
+			return count($splitedFNumber) == 2 ? $splitedFNumber[1] : $exif['COMPUTED']['ApertureFNumber'];
+		}
 	}
 
 	/**
@@ -167,7 +198,7 @@ class WPEVConverter {
 	public static function conv_firmware_version($exif, $options=array()){
 		return self::isEmptyMakerNoteSection($exif) ? self::EMPTY_VALUE : $exif['MAKERNOTE']['FirmwareVersion'];
 	}
-	
+
 	private static function isEmptyFileSeciton($exif) {
 		return empty($exif['FILE']);
 	}
