@@ -107,7 +107,7 @@ class WPExifView {
 		// Upload dir path
 		$upload_path = $this->getUploadDir();
 	
-		$img_path = $upload_path . "/" . ltrim($atts['img'], '/');
+		$img_path = $upload_path . "/" . ltrim(trim($atts['img']), '/');
 		if (!is_file($img_path)) {
 			return $img_path . " is not exists.";
 		}
