@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPExifView\n"
-"Report-Msgid-Bugs-To: tatsuya@fukata.org\n"
-"Language-Team: tatsuya@fukata.org\n"
+"Report-Msgid-Bugs-To: tatsuya.fukata@gmail.com\n"
+"Language-Team: tatsuya.fukata@gmail.com\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Last-Translator: tatsuya@fukata.org\n"
+"Last-Translator: tatsuya.fukata@gmail.com\n"
 
 msgid "Not have exif data"
 msgstr "EXIF情報がありません"
@@ -34,6 +34,9 @@ msgid "MimeType"
 msgstr "MimeType"
 
 msgid "DateTime"
+msgstr "更新日時"
+
+msgid "TakenDate"
 msgstr "撮影日時"
 
 msgid "Maker"
