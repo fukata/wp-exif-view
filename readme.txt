@@ -4,44 +4,44 @@ Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
 Tested up to: 2.9.2
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
-画像のEXIF情報を記事本文内に埋め込む。
+Image EXIF information embedded within the body of the post.
 
 == Description ==
 
-当プラグインは、本文記事内にショートコードで指定することによりアップロードされた画像ファイルのEXIF情報を埋め込む。
+This plugin, the uploaded image file specified by the short code to embed EXIF information in the post text.
 
-現在指定可能な項目一覧
+Available tags
 
-* ファイル名
-* ファイルサイズ
-* 画像サイズ（縦）
-* 画像サイズ（横）
+* File Name
+* File Size
+* Image Height
+* Image Width
 * MimeType
-* 撮影日時
-* カメラメーカー
-* カメラモデル
-* レンズ名
-* ISO値
-* 露出値
-* F値
+* Date Taken
+* Camera Maker
+* Camera Model
+* Lens Name
+* ISO
+* Exposure
+* F
 * CCDWidth
-* ユーザコメント
-* ソフトウェア
-* アーティスト
+* User Comment
+* Software
+* Artist
 * Copyright
-* ファームウェアバージョン
+* Firmware Version
 
 == Installation ==
 
-1. 解凍後、フォルダ「wp-exif-view/」をディレクトリ「/wp-content/plugins/」にアップロードする。
-2. 管理画面よりプラグイン「WPExifView」をアクティベートを行う。
-3. 記事本文内に[exif img="[画像ファイルパス]"]を埋め込む。imgには画像アップロードディレクトリ以下のパスを指定すること。
+1. After extract, the folder "wp-exif-view/" directory to "/wp-content/plugins/" to upload.
+2. plugins from admin "WPExifView" to activate.
+3. in the post text [exif img="[path to image file]"] embedded. img to the path below to upload the image.
 
 == Frequently Asked Questions ==
 
-現在なし
+None
 
 == Screenshots ==
 
@@ -50,20 +50,20 @@ Stable tag: 1.2.2
 
 == Changelog ==
 = 1.2.2 =
-* 利用可能項目に「Maker」を追加
+* Add available tag to "Maker"
 
 = 1.2.1 =
-* 利用可能項目に「Lens」を追加
+* Add available tag to "Lens"
 
 = 1.2.0 =
-* 利用可能項目の追加
-* 記事毎にテンプレートを設定できるように変更
+* Add available tags
+* Set the template so that you can change each article
 
 = 1.1.0 =
-* 管理画面の国際化
+* Internationalization Admin
 
 = 1.0.0 =
-* テンプレートを登録できるように変更
+* Modified to allow for templates
 
 == Upgrade Notice ==
 
