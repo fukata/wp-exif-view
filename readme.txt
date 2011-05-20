@@ -3,8 +3,8 @@ Contributors: tatsuya
 Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
-Tested up to: 2.9.2
-Stable tag: 1.2.3
+Tested up to: 3.1.2
+Stable tag: 1.3.0
 
 Image EXIF information embedded within the body of the post.
 
