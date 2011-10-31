@@ -12,7 +12,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_filename($exif, $options=array()){
-		return self::isEmptyFileSeciton($exif) ? self::EMPTY_VALUE : $exif['FILE']['FileName'];
+		return self::getSectionValue($exif, 'FILE', 'FileName');
 	}
 
 	/**
@@ -21,7 +21,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_filesize($exif, $options=array()){
-		return self::isEmptyFileSeciton($exif) ? self::EMPTY_VALUE : $exif['FILE']['FileSize'];
+		return self::getSectionValue($exif, 'FILE', 'FileSize');
 	}
 
 	/**
@@ -30,7 +30,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_height($exif, $options=array()){
-		return self::isEmptyComputedSeciton($exif) ? self::EMPTY_VALUE : $exif['COMPUTED']['Height'];
+		return self::getSectionValue($exif, 'COMPUTED', 'Height');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_width($exif, $options=array()){
-		return self::isEmptyComputedSeciton($exif) ? self::EMPTY_VALUE : $exif['COMPUTED']['Width'];
+		return self::getSectionValue($exif, 'COMPUTED', 'Width');
 	}
 
 	/**
@@ -48,7 +48,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_mimetype($exif, $options=array()){
-		return self::isEmptyFileSeciton($exif) ? self::EMPTY_VALUE : $exif['FILE']['MimeType'];
+		return self::getSectionValue($exif, 'FILE', 'MimeType');
 	}
 
 	/**
@@ -57,7 +57,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_datetime($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['DateTime'];
+		return self::getSectionValue($exif, 'IFD0', 'DateTime');
 	}
 
 	/**
@@ -66,7 +66,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_taken_date($exif, $options=array()){
-		return self::isEmptyExifSection($exif) ? self::EMPTY_VALUE : $exif['EXIF']['DateTimeOriginal'];
+		return self::getSectionValue($exif, 'EXIF', 'DateTimeOriginal');
 	}
 
 	/**
@@ -75,7 +75,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_maker($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Make'];
+		return self::getSectionValue($exif, 'IFD0', 'Make');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_camera($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Model'];
+		return self::getSectionValue($exif, 'IFD0', 'Model');
 	}
 
 	/**
@@ -93,7 +93,13 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_lens($exif, $options=array()){
-		return self::isEmptyMakerNoteSection($exif) ? self::EMPTY_VALUE : $exif['MAKERNOTE']['UndefinedTag:0x0095'];
+		$lens = self::EMPTY_VALUE;
+		// for Canon EOS 70D
+		$lens = self::getSectionValue($exif, 'EXIF', 'UndefinedTag:0xA434');
+		// for General
+		if (!$lens) $lens = self::isEmptyMakerNoteSection($exif) ? self::EMPTY_VALUE : self::getSectionValue($exif, 'MAKERNOTE', 'UndefinedTag:0x0095');
+
+		return $lens;
 	}
 
 	/**
@@ -102,7 +108,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_iso($exif, $options=array()){
-		return self::isEmptyExifSection($exif) ? self::EMPTY_VALUE : $exif['EXIF']['ISOSpeedRatings'];
+		return self::getSectionValue($exif, 'EXIF', 'ISOSpeedRatings');
 	}
 
 	/**
@@ -112,9 +118,9 @@ class WPEVConverter {
 	 */
 	public static function conv_exposure_time($exif, $options=array()){
 		if (! self::isEmptyExifSection($exif)) {
-			$splitedExposure = explode('/', $exif['EXIF']['ExposureTime']);
+			$splitedExposure = explode('/', self::getSectionValue($exif, 'EXIF', 'ExposureTime'));
 			if ($splitedExposure[0] == 1) {
-				$exposure = $exif['EXIF']['ExposureTime'];
+				$exposure = self::getSectionValue($exif, 'EXIF', 'ExposureTime');
 			} else if (is_numeric($splitedExposure[0]) && is_numeric($splitedExposure[1])) {
 				$_exposure = $splitedExposure[1] / $splitedExposure[0];
 				// ShutterSpeed over 1 seconds
@@ -140,8 +146,8 @@ class WPEVConverter {
 		if (self::isEmptyComputedSeciton($exif)) {
 			return self::EMPTY_VALUE;
 		} else {
-			$splitedFNumber = explode('/', $exif['COMPUTED']['ApertureFNumber']);
-			return count($splitedFNumber) == 2 ? $splitedFNumber[1] : $exif['COMPUTED']['ApertureFNumber'];
+			$splitedFNumber = explode('/', self::getSectionValue($exif, 'COMPUTED', 'ApertureFNumber'));
+			return count($splitedFNumber) == 2 ? $splitedFNumber[1] : self::getSectionValue($exif, 'COMPUTED', 'ApertureFNumber');
 		}
 	}
 
@@ -151,7 +157,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_ccd_width($exif, $options=array()){
-		return self::isEmptyComputedSeciton($exif) ? self::EMPTY_VALUE : $exif['COMPUTED']['CCDWidth'];
+		return self::getSectionValue($exif, 'COMPUTED', 'CCDWidth');
 	}
 
 	/**
@@ -160,7 +166,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_user_comment($exif, $options=array()){
-		return self::isEmptyComputedSeciton($exif) ? self::EMPTY_VALUE : $exif['COMPUTED']['UserComment'];
+		return self::getSectionValue($exif, 'COMPUTED', 'UserComment');
 	}
 
 	/**
@@ -169,7 +175,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_software($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Software'];
+		return self::getSectionValue($exif, 'IFD0', 'Software');
 	}
 
 	/**
@@ -178,7 +184,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_artist($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Artist'];
+		return self::getSectionValue($exif, 'IFD0', 'Artist');
 	}
 
 	/**
@@ -187,7 +193,7 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_copyright($exif, $options=array()){
-		return self::isEmptyIfd0Section($exif) ? self::EMPTY_VALUE : $exif['IFD0']['Copyright'];
+		return self::getSectionValue($exif, 'IFD0', 'Copyright');
 	}
 
 	/**
@@ -200,22 +206,40 @@ class WPEVConverter {
 	}
 
 	private static function isEmptyFileSeciton($exif) {
-		return empty($exif['FILE']);
+		return self::isEmptySection($exif, 'FILE');
 	}
 	private static function isEmptyComputedSeciton($exif) {
-		return empty($exif['COMPUTED']);
+		return self::isEmptySection($exif, 'COMPUTED');
 	}
 	private static function isEmptyComputedThumbnailSeciton($exif) {
 		return self::isEmptyComputedSeciton($exif) || empty($exif['COMPUTED']['Thumnail']);
 	}
 	private static function isEmptyIfd0Section($exif) {
-		return empty($exif['IFD0']);
+		return self::isEmptySection($exif, 'IFD0');
 	}
 	private static function isEmptyExifSection($exif) {
-		return empty($exif['EXIF']);
+		return self::isEmptySection($exif, 'EXIF');
+	}
+	private static function isNotEmptyExifSection($exif) {
+		return !self::isEmptyExifSection($exif);
 	}
 	private static function isEmptyMakerNoteSection($exif) {
-		return empty($exif['MAKERNOTE']);
+		return self::isEmptySection($exif, 'MAKERNOTE');
+	}
+
+	private static function isEmptySection($exif, $section) {
+		return !isset($exif[$section]) || empty($exif[$section]);
+	}
+	public static function getSectionValue($exif, $section, $item, $default=self::EMPTY_VALUE) {
+		if (!isset($exif[$section])) {
+			return $default;
+		}
+
+		if (!isset($exif[$section][$item])) {
+			return $default;
+		}
+
+		return $exif[$section][$item];
 	}
 }
 ?>
