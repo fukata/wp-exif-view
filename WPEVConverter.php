@@ -97,7 +97,7 @@ class WPEVConverter {
 		// for Canon EOS 70D
 		$lens = self::getSectionValue($exif, 'EXIF', 'UndefinedTag:0xA434');
 		// for General
-		if (!$lens) $lens = self::isEmptyMakerNoteSection($exif) ? self::EMPTY_VALUE : self::getSectionValue($exif, 'MAKERNOTE', 'UndefinedTag:0x0095');
+		if (!$lens) $lens = self::getSectionValue($exif, 'MAKERNOTE', 'UndefinedTag:0x0095');
 
 		return $lens;
 	}
