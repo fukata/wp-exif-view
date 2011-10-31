@@ -50,6 +50,9 @@ None
 2. Setting template for post
 
 == Changelog ==
+= 1.3.2 =
+* Fixed Canon EOS 70D Lens Name
+
 = 1.3.1 =
 * As the latest version v1.3.0, but it had not been reflected in changes only version
 
