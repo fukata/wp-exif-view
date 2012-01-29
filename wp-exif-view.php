@@ -3,7 +3,7 @@
 Plugin Name: WPExifView
 Plugin URI: http://fukata.org/dev/wp-plugin/wpexifview/
 Description: Image EXIF information embedded within the body of the post.
-Version: 1.3.2
+Version: 1.4.0
 Author: Tatsuya Fukata
 Author URI: http://fukata.org
 */

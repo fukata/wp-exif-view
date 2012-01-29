@@ -4,7 +4,7 @@ Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
 Tested up to: 3.1.0
-Stable tag: 1.3.2
+Stable tag: 1.4.0
 
 Image EXIF information embedded within the body of the post.
 
@@ -50,6 +50,9 @@ None
 2. Setting template for post
 
 == Changelog ==
+= 1.4.0 =
+* Change format date DateTime and TakenDate.
+
 = 1.3.2 =
 * Fixed Canon EOS 70D Lens Name
 

@@ -57,7 +57,8 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_datetime($exif, $options=array()){
-		return self::getSectionValue($exif, 'IFD0', 'DateTime');
+		$dstr = self::getSectionValue($exif, 'IFD0', 'DateTime');
+		return self::format_date($dstr, @$options['matches']);
 	}
 
 	/**
@@ -66,7 +67,22 @@ class WPEVConverter {
 	 * @param array $options
 	 */
 	public static function conv_taken_date($exif, $options=array()){
-		return self::getSectionValue($exif, 'EXIF', 'DateTimeOriginal');
+		$dstr = self::getSectionValue($exif, 'EXIF', 'DateTimeOriginal');
+		return self::format_date($dstr, @$options['matches']);
+	}
+
+	private static function format_date($dstr, $matches) {
+		if ( count($matches) < 2 ) return $dstr;
+		$format = $matches[1];
+
+		$time = @strtotime($dstr);
+		$d = $dstr;
+		if ( $time !== false ) {
+			$d = @date($format, $time);
+			if ( !$d ) $d = $dstr;
+		}
+
+		return $d;
 	}
 
 	/**
