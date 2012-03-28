@@ -177,6 +177,20 @@ class WPEVConverter {
 	}
 
 	/**
+	 * return converted EXIF.FocalLength value
+	 * @param array $exif
+	 * @param array $options
+	 */
+	public static function conv_focal_length($exif, $options=array()){
+		$focalLength = self::getSectionValue($exif, 'EXIF', 'FocalLength');
+		$splited = explode('/', $focalLength);
+		if (count($splited) == 2) {
+			$focalLength = $splited[0] / $splited[1];
+		}
+		return $focalLength;
+	}
+
+	/**
 	 * return converted COMPUTED.UserComment value
 	 * @param array $exif
 	 * @param array $options

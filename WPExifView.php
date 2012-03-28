@@ -71,6 +71,7 @@ class WPExifView {
 		array("label"=>"ExposureTime", "tag"=>"exposure_time", "convert_method"=>"conv_exposure_time", "note"=>""),
 		array("label"=>"FNumber", "tag"=>"fnumber", "convert_method"=>"conv_fnumber"),
 		array("label"=>"CCDWidth", "tag"=>"ccdwidth", "convert_method"=>"conv_ccd_width"),
+		array("label"=>"Focal Length", "tag"=>"focal_length", "convert_method"=>"conv_focal_length"),
 		array("label"=>"UserComment", "tag"=>"usercomment", "convert_method"=>"conv_user_comment", "note"=>""),
 		array("label"=>"Software", "tag"=>"software", "convert_method"=>"conv_software", "note"=>""),
 		array("label"=>"Artist", "tag"=>"artist", "convert_method"=>"conv_artist", "note"=>""),
