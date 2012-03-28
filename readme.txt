@@ -4,7 +4,7 @@ Donate link: http://fukata.org/
 Tags: images,exif
 Requires at least: 2.9.2
 Tested up to: 3.1.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 
 Image EXIF information embedded within the body of the post.
 
@@ -28,6 +28,7 @@ Available tags
 * Exposure
 * FNumber
 * CCDWidth
+* Focal Length 
 * User Comment
 * Software
 * Artist
@@ -50,6 +51,9 @@ None
 2. Setting template for post
 
 == Changelog ==
+= 1.4.1 =
+* Add available tag to "Focal Length"
+
 = 1.4.0 =
 * Change format date DateTime and TakenDate.
 
